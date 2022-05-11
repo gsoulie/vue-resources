@@ -53,6 +53,15 @@ npm run serve
 
 https://athemes.com/collections/vue-ui-component-libraries/      
 
+**ATTENTION** tous les frameworks ne supportent pas encore Vue3
+
+Ok avec Vue 3 :
+* https://quasar.dev/     
+* https://www.primefaces.org/primevue/setup     
+* https://buefy.org/documentation/start     
+* https://demos.creative-tim.com/vue-material-kit/documentation/#getting-started      
+* https://element-plus.org/en-US/guide/installation.html     
+
 ## Lifecycle hook
 
 https://vuejs.org/guide/essentials/lifecycle.html#lifecycle-diagram      
