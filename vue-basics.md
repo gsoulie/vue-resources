@@ -76,7 +76,7 @@ onMounted(() => { p.value.textContent = 'mounted!' })
 [Back to top](#bases)   
   
   
-##Event listener
+## Event listener
   
 ````html
 <script setup>
