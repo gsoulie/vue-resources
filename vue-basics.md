@@ -32,10 +32,12 @@ L'état qui peut déclencher des mises à jour lorsqu'il est modifié est consid
 Les variables qui ne sont pas utilisées dans la vue n'ont pas besoin d'être déclarée comme ````reactive()```` ou ````ref()````.
 
 ## Commandes
-
-````
-npm i -g @vue/cli	//=> installer le CLI globalement
-````
+| Directive        | Raccourcis           |
+| ------------- |:-------------:|
+|````npm i -g @vue/cli````|installer le CLI globalement|
+|````npm u -g @vue/cli````|mettre à jour le CLI|
+|````vue create <your_project>````|créer un nouveau projet|
+|````vue ui````|utiliser l'interface graphique pour créer un projet|
 
 ````
 npm init vue@latest
