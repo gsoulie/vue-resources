@@ -64,7 +64,8 @@ onMounted(() => { p.value.textContent = 'mounted!' })
   
 ## Raccourcis
 
-|-|-|
+| Directive        | Raccourcis           |
+| ------------- |:-------------:|
 |v-bind:<value>|:<value>|
 |v-bind:class|:class|
 |v-bind:id|:id|
