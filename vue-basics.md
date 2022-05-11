@@ -68,6 +68,10 @@ Ok avec Vue 3 :
 * https://demos.creative-tim.com/vue-material-kit/documentation/#getting-started      
 * https://element-plus.org/en-US/guide/installation.html     
 
+### Quasar
+
+Ajouter quasar à un projet vue ````vue add quasar````
+
 ## Lifecycle hook
 
 https://vuejs.org/guide/essentials/lifecycle.html#lifecycle-diagram      
