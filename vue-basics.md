@@ -66,12 +66,12 @@ onMounted(() => { p.value.textContent = 'mounted!' })
 
 | Directive        | Raccourcis           |
 | ------------- |:-------------:|
-|v-bind:<value>|:<value>|
-|v-bind:class|:class|
-|v-bind:id|:id|
-|v-on:click|@click|
-|v-on:<event_source>|@<event_source>|
-|v-on:input|@input|
+|````v-bind:<value>````|````:<value>````|
+|````v-bind:class````|````:class````|
+|````v-bind:id````|````:id````|
+|````v-on:click````|````@click````|
+|````v-on:<event_source>````|````@<event_source>````|
+|````v-on:input````````|@input````|
   
 [Back to top](#bases)   
   
