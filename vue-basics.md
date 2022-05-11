@@ -38,19 +38,9 @@ Les variables qui ne sont pas utilisées dans la vue n'ont pas besoin d'être d�
 |````npm u -g @vue/cli````|mettre à jour le CLI|
 |````vue create <your_project>````|créer un nouveau projet|
 |````vue ui````|utiliser l'interface graphique pour créer un projet|
-|````npm run serve````|exécuter un serve|
+|````vue serve````|exécuter un serve|
+|````npm run serve````|exécuter un serve avec hot reload|
 
-````
-npm init vue@latest
-cd <project_directory>
-npm i
-npm  run dev
-````
-
-````
-vue create <project_name>
-npm run serve
-````
 ## Extensions VSCode
 
 * vetur (snippet)    
