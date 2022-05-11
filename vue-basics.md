@@ -14,6 +14,7 @@
 * [Composants](#composants)       
 * [Slot template content](#slot-template-content)     
 * [Routing](#routing)     
+* [Divers](#divers)     
 
 
 ## Introduction
@@ -493,14 +494,13 @@ export default router;
   </nav>
 </template>
 ````
-  
-// **************************************************
-// ajouter une classe / id css dynamique
+[Back to top](#bases)       
 
-v-bind:id peut être remplacé par :id
-v-bind:class	=> :class
-v-bind:value	=> :value
+## Divers
 
+ajouter une classe / id css dynamique
+
+````html
 <script setup>
 	import { ref } from 'vue'
 
@@ -521,30 +521,5 @@ v-bind:value	=> :value
 	  background: coral;
 	}
 </style>
-
-
-// **********************************
-// Lifecycle hook
-
-So far, Vue has been handling all the DOM updates for us, thanks to reactivity and declarative rendering. However, inevitably there will be cases where we need to manually work with the DOM.
-
-We can request a template ref - i.e. a reference to an element in the template - using the special ref attribute:
-
-Notice the ref is initialized with null value. This is because the element doesn't exist yet when <script setup> is executed. The template ref is only accessible after the component is mounted.
-
-<script setup>
-import { ref, onMounted } from 'vue'
-
-const p = ref(null)
-
-onMounted(() => {
-  p.value.textContent = 'mounted!'
-})
-</script>
-
-<template>
-  <p ref="p">hello</p>
-</template>
-
-
+````
 [Back to top](#bases)     
