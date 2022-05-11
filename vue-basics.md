@@ -34,6 +34,10 @@ Les variables qui ne sont pas utilisées dans la vue n'ont pas besoin d'être d�
 ## Commandes
 
 ````
+npm i -g @vue/cli	//=> installer le CLI globalement
+````
+
+````
 npm init vue@latest
 cd <project_directory>
 npm i
