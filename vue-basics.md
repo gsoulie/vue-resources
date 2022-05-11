@@ -41,6 +41,15 @@ Les variables qui ne sont pas utilisées dans la vue n'ont pas besoin d'être d�
 |````vue serve````|exécuter un serve|
 |````npm run serve````|exécuter un serve avec hot reload|
 
+*Obtenir un projet complètement configuré avec routing etc...*
+
+````
+npm init vue@latest
+cd <project_directory>
+npm i
+npm  run dev
+````
+
 ## Extensions VSCode
 
 * vetur (snippet)    
