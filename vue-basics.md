@@ -3,6 +3,7 @@
 # Bases
 
 * [Introduction](#introduction)      
+* [Commandes](#commandes)      
 * [Extensions VSCode](#extensions-vscode)     
 * [Lifecycle hook](#lifecycle-hook)      
 * [Raccourcis](#raccourcis)     
@@ -29,6 +30,19 @@ L'état qui peut déclencher des mises à jour lorsqu'il est modifié est consid
 
 Les variables qui ne sont pas utilisées dans la vue n'ont pas besoin d'être déclarée comme ````reactive()```` ou ````ref()````.
 
+## Commandes
+
+````
+npm init vue@latest
+cd <project_directory>
+npm i
+npm  run dev
+````
+
+````
+vue create <project_name>
+npm run serve
+````
 ## Extensions VSCode
 
 * vetur (snippet)    
