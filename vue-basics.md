@@ -41,6 +41,8 @@ Les variables qui ne sont pas utilisées dans la vue n'ont pas besoin d'être d�
 |````vue serve````|exécuter un serve|
 |````npm run serve````|exécuter un serve avec hot reload|
 
+**CONSEIL** utiliser ````vue ui```` pour pouvoir configurer manuellement toutes les options (typescript, sass, router, vuex...)
+
 *Obtenir un projet complètement configuré avec routing etc...*
 
 ````
