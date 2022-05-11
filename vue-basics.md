@@ -71,7 +71,7 @@ onMounted(() => { p.value.textContent = 'mounted!' })
 |````v-bind:id````|````:id````|
 |````v-on:click````|````@click````|
 |````v-on:<event_source>````|````@<event_source>````|
-|````v-on:input````````|@input````|
+|````v-on:input````|````@input````|
   
 [Back to top](#bases)   
   
