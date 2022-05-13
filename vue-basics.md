@@ -279,7 +279,35 @@ function onInput(e) { text.value = e.target.value }
   
   
 ## Reference computed
-  
+ 
+> équivalent aux pipeTransform Angular
+	
+*exemple pipe qui double une valeur*
+
+*Angular*
+````
+@Component({
+	selector: 'app-doublecount',
+	template: '<div>{{ number | double }}</div>',
+})
+export class DoublecountComponent {
+	count: number = 10;
+}
+
+*Vue*
+````html
+<script setup>
+import { ref, computed } from 'vue';
+const count = ref(10);
+const doubleCount = computed(() => count.value * 2);
+</script>
+
+<template>
+	<div>{{ doubleCount }}</div>
+</template>
+````
+
+**Autre exemple**
 ````html
 <script setup>
 import { ref, computed } from 'vue'
