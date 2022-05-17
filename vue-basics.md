@@ -569,6 +569,8 @@ Côté composant enfant, il est possible de définir un contenu "par défaut" lo
 [Back to top](#bases)   
   
 ## Routing
+	
+https://router.vuejs.org/guide/essentials/navigation.html#navigate-to-a-different-location
 
 *router/index.ts*
 
@@ -607,6 +609,26 @@ export default router;
     <RouterLink to="/about">About</RouterLink>
   </nav>
 </template>
+	
+<script setup lang="ts">
+	import router from '@/router';
+	
+	//routing par code
+	// literal string path
+	router.push('/users/eduardo')
+
+	// object with path
+	router.push({ path: '/users/eduardo' })
+
+	// named route with params to let the router build the url
+	router.push({ name: 'user', params: { username: 'eduardo' } })
+
+	// with query, resulting in /register?plan=private
+	router.push({ path: '/register', query: { plan: 'private' } })
+
+	// with hash, resulting in /about#team
+	router.push({ path: '/about', hash: '#team' })
+</script>
 ````
 [Back to top](#bases)       
 
