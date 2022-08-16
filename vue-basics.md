@@ -14,6 +14,8 @@
 * [Reference computed](#reference-computed)     
 * [Watchers](#watchers)       
 * [Composants](#composants)       
+* [props](#props)     
+* [Fonction computed](#fonction-computed)     
 * [Slot template content](#slot-template-content)     
 * [Routing](#routing)     
 * [Divers](#divers)     
@@ -543,6 +545,160 @@ const counter = reactive({
   }
 </style>
 ````
+	
+[Back to top](#bases)    
+
+## props
+
+Les **props** sont comparables aux ````@Input()```` d'Angular. Elles permettent de partager des variables avec d'autres composants
+
+### Exposer les props
+
+Pour pouvoir exposer une variable en tant que *props* il faut au préalable la retourner à la fin du *setup* via la fonction ````return````.
+
+Ensuite dans la vue on peut passer cette variable à d'autres composants en déclarant la propriété de la manière suivante ````<RestaurantRow :restaurants="data"></RestaurantRow>````
+
+*home.vue*
+
+````html
+<template>
+  <div class="home">
+    <RestaurantRow :restaurants="data"></RestaurantRow>
+  </div>
+</template>
+
+<script lang="ts">
+
+import { ref, onMounted } from 'vue';
+
+export default {
+    name: 'Home',
+    components: {
+        RestaurantRow
+    },
+    setup() {
+        const data = ref<Restaurant[]>([]); // ref() nécessaire pour déclarer la variable "observable"
+        // sans le ref(), toute modification des données ne déclencherai pas de changement dans la vue
+
+        /**
+         * ie : ngOnInit
+         */
+        onMounted(() => {
+            initializeDatabase();
+        });
+        
+        function initializeDatabase() {
+            // remplir data    
+			...
+        }  
+        
+        // Dernière étape du Setup()
+        return {
+            data,   // indiquer qu'on souhaite exposer data aux autres composants
+        }
+    }
+}
+</script>
+````
+
+Côté composant "enfant", pour accéder à la props, il faut déclarer la props que l'on reçoit à la manière du ````@Input()```` d'Angular 
+
+*RestaurantRow.vue* 
+
+````html
+<template>
+	<div class="row">
+		<RestaurantCard 
+		class="cell"
+		v-for="(r, index) in restaurants" :key="index" :restaurant="r"></RestaurantCard>
+	</div>
+</template>
+
+<script lang="ts">
+import RestaurantCard from './RestaurantCard.vue'
+
+export default {
+    name: 'RestaurantRow',
+    components: {
+        RestaurantCard
+    },
+    props: {
+        restaurants: Array	// <--- déclaration de la props (ici c'est un tableau de Restaurant)
+    } 
+}
+</script>
+```` 
+
+### Accéder aux props dans le setup
+
+````html
+<script lang="ts">
+import Restaurant from '@/models/restaurant'
+export default {
+    name: 'RestaurantCard',
+    props: {
+        restaurant: Restaurant
+    },
+	setup(props) {	// <--- permet d'accéder aux props dans le setup
+	
+	}
+}
+</script>
+````
+
+[Back to top](#bases)   
+## Fonction computed
+
+Les fonctions computed permettent de retourner une valeur calculée. Par exemple nous recevons une liste de restaurant avec une image, et nous souhaitons
+calculer la chaîne css qui permettra de positionner le background-image correspondant à chaque restaurant.
+
+Il est possible d'utiliser une fonction "classique" et l'utiliser dans la vue sans aucun souci mis à part qu'à chaque modification des données, vue va
+générer un nouveau rendu et donc rejouer la fonction. 
+Les fonction **computed** en revanche, ont l'avantage d'être plus performantes dans le cas d'un calcul d'info dans la vue car elles font du **caching**. 
+On pourrait aussi comparer les fonction *computed* aux **PipeTransform** d'Angular.
+
+Comment le cache des fonctions computed ?
+
+1 : Vue va chercher des données réactives dans votre fonction computed     
+2 : La première exécution de la fonction computed va créer un cache, qu’il trouve ou non une donnée réactive     
+3 : Si au prochain rendu (à l’update), il voit qu’une donnée réactive utilisée dans le computed a changé, il ré-exécute le computed pour créer un nouveau résultat et le remet en cache     
+4 : S’il ne trouve aucune dépendance (donnée réactive), il renverra toujours le même résultat, celui du cache précédent.     
+
+*RestaurantCard.vue*
+
+````html
+<template>
+  <div class="restaurant-card">
+    <div :style="changeBackground" class="restaurant-img"></div>
+    {{ restaurant.name }}
+  </div>
+</template>
+
+<script lang="ts">
+import Restaurant from '@/models/restaurant'
+import { computed } from 'vue'	// <--- import de computed
+
+export default {
+    name: 'RestaurantCard',
+    props: {
+        restaurant: Restaurant
+    },
+    setup(props) {
+        const changeBackground = computed(() => {	// <-- Fonction computed
+            return {
+                backgroundImage: `url(${props.restaurant?.image})`.toString()
+            }
+        })
+
+		// IMPORTANT :  retourner cette fonction à la fin du setup
+        return {
+            changeBackground
+        }
+    }
+}
+</script>
+````
+	
 [Back to top](#bases)   
   
 ## Slot template content
