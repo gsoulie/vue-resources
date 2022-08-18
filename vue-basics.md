@@ -41,9 +41,20 @@ Les variables qui ne sont pas utilisées dans la vue n'ont pas besoin d'être d�
 |````vue create <your_project>````|créer un nouveau projet|
 |````vue ui````|utiliser l'interface graphique pour créer un projet|
 |````vue serve````|exécuter un serve|
+|````vue-cli-service build --mode production````|compiler en mode production (voir plus bas)|
 |````npm run serve````|exécuter un serve avec hot reload|
 
 **CONSEIL** utiliser ````vue ui```` pour pouvoir configurer manuellement toutes les options (typescript, sass, router, vuex...)
+
+*package.json*
+````json
+...
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build --mode production"	// <-- rajouter le mode de build. commande dans le terminal : $vue build
+  },
+  ...
+````
 
 *Obtenir un projet complètement configuré avec routing etc...*
 
