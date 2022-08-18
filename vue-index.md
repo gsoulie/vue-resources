@@ -2,6 +2,7 @@
 
 * [Bases](https://github.com/gsoulie/vue-resources/blob/main/vue-basics.md)      
 * [Presentation](#presentation)      
+* [Projet exemple](https://github.com/gsoulie/vue-example-ubereats)      
 * [Events](#emit-events)     
 * [Watcher](#watcher)     
 * [Routing](#routing)     
