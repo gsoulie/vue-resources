@@ -90,6 +90,30 @@ export default {
 </script>
 ````
 
+**Autre syntaxe simplifiée possible**
+
+````typescript
+<script lang="ts">
+import { ref, watch } from 'vue';
+
+export default {
+    name: 'Header',
+    // emits: ["customChange"], // <--- non nécessaire
+    setup(props, ctx ) {	// <--- 'ctx' peut prendre le nnom que l'on souhaite
+        const sendChange = (event) => {
+		ctx.emit("customChange", event.target.value)
+	}
+		
+        return {
+            sendChange
+        }
+    }
+}
+</script>
+````
+
+
+
 [Back to top](#ressources-vue3)     
 
 ## watcher
