@@ -76,10 +76,10 @@ import { ref, watch } from 'vue';
 export default {
     name: 'Header',
     emits: ["customChange"],
-    setup(props, { emit }) {
+    setup(props, { emit }) {	// <--- utilisation directe avec destructuration du context.emit
         
 		const sendChange = (event) => {
-			emit("customChange", event.target.value)
+			emit("customChange", event.target.value)	// <--- utilisation directe du emit
 		}
 		
         return {
@@ -99,9 +99,9 @@ import { ref, watch } from 'vue';
 export default {
     name: 'Header',
     // emits: ["customChange"], // <--- non nécessaire
-    setup(props, ctx ) {	// <--- 'ctx' peut prendre le nnom que l'on souhaite
+    setup(props, ctx ) {	// <--- syntaxe sanas destructuration, 'ctx' peut prendre le nom que l'on souhaite
         const sendChange = (event) => {
-		ctx.emit("customChange", event.target.value)
+		ctx.emit("customChange", event.target.value)	/// <--- appeler <nom>.emit
 	}
 		
         return {
