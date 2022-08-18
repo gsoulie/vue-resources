@@ -298,7 +298,7 @@ function onInput(e) { text.value = e.target.value }
 *exemple pipe qui double une valeur*
 
 *Angular*
-````
+````typescript
 @Component({
 	selector: 'app-doublecount',
 	template: '<div>{{ number | double }}</div>',
@@ -306,7 +306,8 @@ function onInput(e) { text.value = e.target.value }
 export class DoublecountComponent {
 	count: number = 10;
 }
-
+````
+	
 *Vue*
 ````html
 <script setup>
