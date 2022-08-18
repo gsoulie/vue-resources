@@ -68,6 +68,8 @@ npm  run dev
 ## Extensions VSCode
 
 * vetur (snippet)    
+* vue 3 snippets highlight formatters     
+  
 [Back to top](#bases)   
 
 ## Frameworks UI
