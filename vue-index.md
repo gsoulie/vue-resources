@@ -58,7 +58,7 @@ setup() {
 ````
 
 
-### Solution 2 - composition API : émettre depuis le script
+### Solution 2 - émettre depuis le script avec un custom event
 
 *Child.vue*
 ````html
@@ -75,7 +75,7 @@ import { ref, watch } from 'vue';
 
 export default {
     name: 'Header',
-    emits: ["customChange"],
+    emits: ["customChange"],	// <--- déclarer le nom de l'event sinon warning
     setup(props, { emit }) {	// <--- utilisation directe de la fonction emit avec destructuration du context.emit
         
 		const sendChange = (event) => {
