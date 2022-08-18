@@ -635,8 +635,13 @@ export default {
         RestaurantCard
     },
     props: {
-        restaurants: Array	// <--- déclaration de la props (ici c'est un tableau de Restaurant)
-    } 
+        restaurants: {
+		type: Array,	// <--- déclaration de la props (ici c'est un tableau de Restaurant)
+		required: true
+	}
+	// !! Ou alors, si option required non nécessaire :
+	restaurants: Array,
+    } 	
 }
 </script>
 ```` 
