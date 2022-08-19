@@ -7,6 +7,7 @@
 * [Watcher](#watcher)     
 * [Routing](#routing)     
 * [Composable](#composable)      
+* [Appels api avec Axios](#appels-api-avec-axios)       
 
 
 ## Présentation
@@ -295,3 +296,118 @@ setup() {
 </script>
 ````
 [Back to top](#ressources-vue3)     
+
+## Appels api avec Axios
+
+**Axios** est une librairie permettant de réaliser des appels http
+
+````npm i axios````
+
+*Home.vue*
+````typescript
+<script>
+	import axios from 'axios
+	export default {
+		setup() {
+			data = ref([])
+			
+			onMounted(async () => {	// <--- ne pas oublier le async
+				fetchData();
+			})
+			
+			async function fetchData() {
+				try {
+					const { data } = await axios.get('https://dummyjson.com/products');
+            				console.log(data);
+				} catch(e) {
+				
+				}
+			}
+			
+			const createPost = () => {
+				axios.post('https://dummyjson.com/products/add',
+					JSON.stringify(
+						id: 99,
+						title: 'akdapdokzap',
+						...
+					)
+				)
+				.then(response => {
+					console.log(response);
+				})
+				.catch(e => console.warn(e));
+			}
+		}
+	}
+</script>
+````
+
+````axios.get()```` retourne une promise
+
+
+### Bonne pratique - ApiHelper
+
+Créer un service ApiHelper
+
+*apiHelper.ts*
+
+````typescript
+import axios from 'axios'
+
+export default(url='http://api.kanye.rest') => {	//<-- url par défaut
+	return axios.create({
+		baseURL: url
+	})
+}
+````
+
+Ensuite créer autant de services que nécessaires pour chaque domaines
+
+*KanyeAPI.ts*
+````typescript
+import apiHelper from './apiHelper'
+
+export default {
+	getQuote() {
+		return apiHelper().get('/')
+	}
+	
+	createPost(data) {
+		return apiHelper('https://jsonplaceholder.typicode.com/').post('/posts', data)
+	}
+}
+````
+
+Appel depuis un composant
+
+*Home.vue*
+
+````typescript
+import KanyeAPI from './services/KanyeAPI'
+
+<script>
+	export default {
+		setup() {
+			const quote = ref('');
+			
+			const loadQuote = async () => {
+				const response = await KanyeAPI.getQuote()
+				quote.value = response.data.quote
+			}
+			
+			onMounted(async () => { loadQuote() })
+			
+			const createPost = async () => {
+				const response = KanyeAPI.createPost(JSON.stringify({
+					title: 'foo',
+					body: 'bar',
+					userId: 1
+				}))
+				.catch(e => console.warn(e))
+				
+				console.log(response)
+			}
+		}
+	}
+</script>
+````
