@@ -140,9 +140,9 @@ app.mount('#app');
 
 https://vuejs.org/guide/essentials/lifecycle.html#lifecycle-diagram      
 
-* onMounted = ngOnInit      
+* onMounted = ngOnInit()      
 * onUpdated      
-* onUnmounted      
+* onUnmounted = ngOnDestroy()     
 
 So far, Vue has been handling all the DOM updates for us, thanks to reactivity and declarative rendering. However, inevitably there will be cases where we need to manually work with the DOM.
 
