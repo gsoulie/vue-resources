@@ -5,6 +5,7 @@
 * [Introduction](#introduction)      
 * [Commandes](#commandes)      
 * [Extensions VSCode](#extensions-vscode)     
+* [VueUse](#vueuse)     
 * [Frameworks UI](#frameworks-ui)     
 * [Lifecycle hook](#lifecycle-hook)      
 * [Raccourcis](#raccourcis)     
@@ -71,6 +72,10 @@ npm  run dev
 * vue 3 snippets highlight formatters     
   
 [Back to top](#bases)   
+
+## VueUse
+
+**VueUse** est une collection de fonctions utilitaires : https://vueuse.org/       
 
 ## Frameworks UI
 
