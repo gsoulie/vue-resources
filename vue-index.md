@@ -414,6 +414,9 @@ import KanyeAPI from './services/KanyeAPI'
 ````
 [Back to top](#ressources-vue3)     
 
+https://www.youtube.com/watch?v=fh0VboqAc8k&ab_channel=ProgramWithErik       
+
+
 ## Vue state avec vuex
 
 **vuex** permet de gérer le state de l'application et de répercuter ses modifications automatiquement.
