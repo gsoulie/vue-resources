@@ -1,8 +1,9 @@
 # Ressources Vue3
 
 * [Bases](https://github.com/gsoulie/vue-resources/blob/main/vue-basics.md)      
-* [Presentation](#presentation)      
+* [Présentation](#presentation)      
 * [>> Projet exemple](https://github.com/gsoulie/vue-example-ubereats)      
+* [Initialisation projet](#initialisation-projet)       
 * [Events](#emit-events)     
 * [Watcher](#watcher)     
 * [Routing](#routing)     
@@ -24,6 +25,49 @@ VueJS prend aussi les bonnes idées de ses concurrents. Il permet le data bindin
 On retrouve aussi l’organisation par composant. Cette fonctionnalité permet de découper ton application en plusieurs sous-composants qui gèrent chacun leur vie et qui sont réutilisables. Imaginons tu veux faire une liste d’images : tu peux faire un composant qui gère l’image et un composant qui gère une liste de composant image.
 
 VueJS se concentre sur la partie vue de ton application. Pour ce faire, le framework s’inspire en partie du patron d’architecture MVVM. VueJS va lier ton DOM, la partie vue, avec ton instance de vue, la partie Vue-Modèle. Ces deux parties sont liées par le système de data-binding
+
+[Back to top](#ressources-vue3)     
+
+## Initialisation projet
+
+### styles
+
+Créer un fichier *style.scss* dans un répertoire *src/styles* pour initialiser les styles de bases et centraliser tous les styles génériques
+
+*styles.scss*
+````css
+html {
+	line-height: 1.15; /* 1 */
+	-webkit-text-size-adjust: 100%; /* 2 */
+}  
+body {
+	margin: 0;
+}  
+main {
+	display: block;
+}
+a {
+	text-decoration: none;
+}
+````
+
+Import dans le *App.vue*
+````scss
+<style lang="scss">
+@import url('./styles/style.scss');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+#app {
+  font-family: 'Roboto', Sans-serif;
+  -webkit-font-smoothing: antialiased;	// important
+  -moz-osx-font-smoothing: grayscale;	// important
+  text-align: center;
+  color: #2c3e50;  
+}
+body {
+  padding: 0px;
+}
+</style>
+````
 
 [Back to top](#ressources-vue3)     
 
