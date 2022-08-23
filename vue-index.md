@@ -6,7 +6,7 @@
 * [Initialisation projet](#initialisation-projet)       
 * [Events](#emit-events)     
 * [Watcher](#watcher)     
-* [Routing](#routing)     
+* [Routing, guard, titre](#routing)     
 * [Composable](#composable)      
 * [Appels api avec Axios](#appels-api-avec-axios)       
 * [Vue state avec vuex](#vue-state-avec-vuex)     
@@ -269,6 +269,7 @@ export default {
 
 </style>
 ````
+[Back to top](#ressources-vue3)     
 
 ### Lister les params d'une route
 
@@ -280,6 +281,7 @@ setup() {
 	console.log('params', params);
 }
 ````
+[Back to top](#ressources-vue3)     
 
 ### Routing dans la vue
 
@@ -295,6 +297,89 @@ setup() {
         </div>
     </router-link>
 </template>
+````
+[Back to top](#ressources-vue3)     
+
+### Modifier le titre des pages
+
+*router/index.ts*
+
+````typescript
+const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView,
+    meta: {
+      title: 'Home'
+    }
+  },
+]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+})
+
+// Changer le titre des pages
+router.beforeEach((to, from, next) => {
+  document.title = `${to.meta.title} | Active Tracker`
+});
+````
+[Back to top](#ressources-vue3)     
+
+### Route guard
+
+*router/index.ts*
+````typescript
+const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView,
+    meta: {
+      title: 'Home',
+	  auth: false	// <--
+    }
+  },{
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/Login.vue'),
+    meta: {
+      title: 'Login',
+      auth: false	// <--
+    }
+  },{
+    path: '/create',
+    name: 'create',
+    component: () => import('../views/Create.vue'),
+    meta: {
+      title: 'Create',
+      auth: true	// <--
+    }
+  },
+  { 
+    path: '/:pathMatch(.*)*', 	// <-- Page 404
+    name: 'not-found', 
+    component: () => import('../views/Error404.vue'),
+  }
+]
+
+// Guard
+router.beforeEach((to, from, next) => {
+  // Vérifier la condition voulue : ici on vérifie que l'utilisateur est authentifié avec supabase
+  const user = supabase.auth.user();  // récupérer l'état d'authentification de l'utilisateur supabase
+
+  if (to.matched.some((res) => res.meta.auth)) {
+    if (user) {
+      next();
+      return;
+    }
+    next({name: 'login'});	// <-- redirection vers le login
+    return;
+  }
+  next();	// <-- laisser continuer la redirection
+});
 ````
 
 [Back to top](#ressources-vue3)     
