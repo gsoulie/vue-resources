@@ -52,3 +52,91 @@ export default {
 }
 </script>
 ````
+	
+### exemple pipe qui double une valeur
+
+*Angular*
+````typescript
+@Component({
+	selector: 'app-doublecount',
+	template: '<div>{{ number | double }}</div>',
+})
+export class DoublecountComponent {
+	count: number = 10;
+}
+````
+	
+*Vue*
+````html
+<script>
+import { ref, computed } from 'vue';
+	
+setup() {
+	const count = ref(10);
+	const doubleCount = computed(() => count.value * 2);
+	return { count, doubleCount }
+}
+</script>
+
+<template>
+	<div>{{ doubleCount }}</div>
+</template>
+````
+
+### Autre exemple
+````html
+<script>
+import { ref, computed } from 'vue'
+
+setup() {
+	let id = 0
+
+	const newTodo = ref('')
+	const hideCompleted = ref(false)
+	const todos = ref([
+	  { id: id++, text: 'Learn HTML', done: true },
+	  { id: id++, text: 'Learn JavaScript', done: true },
+	  { id: id++, text: 'Learn Vue', done: false }
+	])
+	const filteredTodos = computed(() => {
+	  // return filtered todos based on
+	  // `todos.value` & `hideCompleted.value`
+	  return hideCompleted.value
+		? todos.value.filter((t) => !t.done)
+		: todos.value
+	})
+
+	function addTodo() {
+	  todos.value.push({ id: id++, text: newTodo.value, done: false })
+	  newTodo.value = ''
+	}
+
+	function removeTodo(todo) {
+	  todos.value = todos.value.filter((t) => t !== todo)
+	}
+	return { newTodo, todos, hideCompleted, addTodo, removeTodo, filteredTodos}
+}
+</script>
+
+<template>
+  <form @submit.prevent="addTodo">
+    <input v-model="newTodo" />
+    <button>Add Todo</button>
+  </form>
+  <ul>
+    <li v-for="todo in filteredTodos" :key="todo.id">
+      <input type="checkbox" v-model="todo.done">
+      <span :class="{ done: todo.done }">{{ todo.text }}</span>
+      <button @click="removeTodo(todo)">X</button>
+    </li>
+  </ul>
+      
+  <button @click="hideCompleted = !hideCompleted">
+    {{ hideCompleted ? 'Show all' : 'Hide completed' }}
+  </button>
+</template>
+
+<style>
+.done { text-decoration: line-through; }
+</style>
+````
