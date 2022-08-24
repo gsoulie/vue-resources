@@ -9,6 +9,32 @@
 
 Les **props** sont comparables aux ````@Input()```` d'Angular. Elles permettent de partager des variables avec d'autres composants
 
+Il est officiellement recommandé de déclarer les props de la manière suivante :
+
+````typescript
+// Simply
+props: {
+  status: String
+}
+
+// Even better!
+props: {
+  status: {
+    type: String,
+    required: true,
+
+    validator: value => {
+      return [
+        'syncing',
+        'synced',
+        'version-conflict',
+        'error'
+      ].includes(value)
+    }
+  }
+}
+````
+
 ### Exposer les props
 
 Pour pouvoir exposer une variable en tant que *props* il faut au préalable la retourner à la fin du *setup* via la fonction ````return````.
