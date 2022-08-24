@@ -23,48 +23,26 @@ setup() {
 </template>
 ````
 [Back to top](#directives-structurelles)     
+
+> Il est impératif de déclarer une *:key* pour garantir l'ordre interne des données dans le composant.
   
 ## v-for
 
 ````html
-<script>
-import { ref } from 'vue'
-
-setup() {
-	// give each todo a unique id
-	let id = 0
-
-	const newTodo = ref('')
-	const todos = ref([
-	  { id: id++, text: 'Learn HTML' },
-	  { id: id++, text: 'Learn JavaScript' },
-	  { id: id++, text: 'Learn Vue' }
-	])
-
-	function addTodo() {
-	  todos.value.push({ id: id++, text: newTodo.value})
-	  // reset todo
-	  newTodo.value = ''
-	}
-
-	function removeTodo(todo) {
-	  todos.value = todos.value.filter(t => t.id !== todo.id)
-	}
-	return { addTodo, newTodo, todos, removeTodos }
-}
-</script>
-
 <template>
-  <form @submit.prevent="addTodo">
-    <input v-model="newTodo">
-    <button>Add Todo</button>    
-  </form>
-  <ul>
-    <li v-for="todo in todos" :key="todo.id">
-      {{ todo.text }}
-      <button @click="removeTodo(todo)">X</button>
-    </li>
-  </ul>
+<ul>
+  <li v-for="todo in todos" :key="todo.id">
+    {{ todo.text }}
+  </li>
+</ul>
+	
+<!-- Declaring Index as key -->
+	
+<ul>
+  <li v-for="(index, user) in users" :key="index">
+    {{ user.name }}
+  </li>
+</ul>
 </template>
 ````
 [Back to top](#directives-structurelles)     
