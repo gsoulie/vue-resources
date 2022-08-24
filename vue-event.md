@@ -35,6 +35,20 @@ props: {
 }
 ````
 
+De même qu'il est **recommandé** d'utiliser la syntaxe *camelCase* dans le code de déclaration et la syntaxe *kebab-case* dans le template
+
+````html
+<script>
+props: {
+  greetingText: String
+}
+</script>
+
+<template>
+	<WelcomeMessage greeting-text="hi"/>
+</template>
+````
+
 ### Exposer les props
 
 Pour pouvoir exposer une variable en tant que *props* il faut au préalable la retourner à la fin du *setup* via la fonction ````return````.
