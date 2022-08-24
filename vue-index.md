@@ -7,6 +7,7 @@
 	* Initialisation projet    
 	* Raccourcis    
 	* Lifecycle hook    
+	* Bonnes pratiques      
 * [Directives structurelles](https://github.com/gsoulie/vue-resources/blob/main/vue-directive.md)      
 * [>> Projet exemple](https://github.com/gsoulie/vue-example-ubereats)      
 * [Frameworks UI](https://github.com/gsoulie/vue-resources/blob/main/vue-ui.md)     
