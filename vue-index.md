@@ -9,6 +9,7 @@
 	* Lifecycle hook    
 	* Bonnes pratiques      
 * [Directives structurelles](https://github.com/gsoulie/vue-resources/blob/main/vue-directive.md)      
+* [Component Slot injection](https://github.com/gsoulie/vue-resources/blob/main/vue-component.md)      
 * [>> Projet exemple](https://github.com/gsoulie/vue-example-ubereats)      
 * [Frameworks UI](https://github.com/gsoulie/vue-resources/blob/main/vue-ui.md)     
 * [Vueuse](https://github.com/gsoulie/vue-resources/blob/main/vue-use.md)     
