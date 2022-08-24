@@ -101,7 +101,7 @@ setup() {
     v-model="searchField" 
     @change="$emit('response', $event.target.value)"
     type="text" 
-    placeholder="Que chezchez vous ?"/>
+    placeholder="Que cherchez vous ?"/>
 </template>
 ````
 
