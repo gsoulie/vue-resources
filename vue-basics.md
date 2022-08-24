@@ -34,6 +34,45 @@ L'état qui peut déclencher des mises à jour lorsqu'il est modifié est consid
 
 Les variables qui ne sont pas utilisées dans la vue n'ont pas besoin d'être déclarée comme ````reactive()```` ou ````ref()````.
 
+Deux syntaxes sont alors possibles :
+
+````typescript
+<script setup>
+import { ref } from 'vue'
+
+const awesome = ref(true)
+
+function toggle() { awesome.value = !awesome.value }
+</script>
+
+<template>
+  <button @click="toggle">toggle</button>
+  <h1 v-if="awesome">Vue is awesome!</h1>
+  <h1 v-else>Oh no 😢</h1>
+</template>
+````
+
+Ou
+
+````typescript
+<script>
+import { ref } from 'vue'
+
+setup() {
+	const awesome = ref(true)
+	function toggle() { awesome.value = !awesome.value }
+	
+	return { awesome, toggle }
+}
+</script>
+
+<template>
+  <button @click="toggle">toggle</button>
+  <h1 v-if="awesome">Vue is awesome!</h1>
+  <h1 v-else>Oh no 😢</h1>
+</template>
+````
+
 ## Commandes
 | Directive        | Raccourcis           |
 | ------------- |:-------------:|
@@ -48,13 +87,11 @@ Les variables qui ne sont pas utilisées dans la vue n'ont pas besoin d'être d�
 **CONSEIL** utiliser ````vue ui```` pour pouvoir configurer manuellement toutes les options (typescript, sass, router, vuex...)
 
 *package.json*
-````json
-...
+````typescript
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production"	// <-- rajouter le mode de build. commande dans le terminal : $vue build
   },
-  ...
 ````
 
 *Obtenir un projet complètement configuré avec routing etc...*
@@ -107,17 +144,16 @@ Ok avec Vue 3 :
 * https://element-plus.org/en-US/guide/installation.html     
 
 ### PrimeVue
-
 ````
 npm install primevue@^3.12.6 --save
 npm install primeicons --save
 ````
 
-**Importer un thème **
+**Importer un thème**
 
 Prime propose une multitude de thème (accessibles depuis le bouton engrenage du side menu https://www.primefaces.org/primevue/setup)
 
-*Exemple import thème par défaut* (imports à ajouter dans le *main.ts*
+*Exemple import thème par défaut* (imports à ajouter dans le *main.ts*)
 
 ````
 import 'primevue/resources/themes/saga-blue/theme.css'       //theme
@@ -125,7 +161,7 @@ import 'primevue/resources/primevue.min.css'                 //core css
 import 'primeicons/primeicons.css'                           //icons
 ````
 
-**Configuration main.ts*
+**Configuration main.ts**
 
 *main.ts*
 ````typescript
@@ -165,19 +201,20 @@ https://vuejs.org/guide/essentials/lifecycle.html#lifecycle-diagram
 * onUpdated      
 * onUnmounted = ngOnDestroy()     
 
-So far, Vue has been handling all the DOM updates for us, thanks to reactivity and declarative rendering. However, inevitably there will be cases where we need to manually work with the DOM.
+Jusqu'à présent, Vue gérait pour nous toutes les mises à jour du DOM, grâce à la réactivité et au rendu déclaratif. Cependant, il y aura inévitablement des cas où nous devrons travailler manuellement avec le DOM.
 
-We can request a template ref - i.e. a reference to an element in the template - using the special ref attribute:
+Il est possible de d'obtenir une référence à un élément du template grâce à l'attribut **ref()**
 
-Notice the ref is initialized with null value. This is because the element doesn't exist yet when <script setup> is executed. The template ref is only accessible after the component is mounted.
+> Notez que la référence est initialisée avec une valeur nulle. C'est parce que l'élément n'existe pas encore lorsque <script setup> est exécuté. La référence du modèle n'est accessible qu'après le montage du composant.
 
 ````html
-<script setup>
+<script>
 import { ref, onMounted } from 'vue'
 
-const p = ref(null)
-
-onMounted(() => { p.value.textContent = 'mounted!' })
+setup() {
+	const p = ref(null)
+	onMounted(() => { p.value.textContent = 'mounted!' })
+}
 </script>
 
 <template>
@@ -202,15 +239,18 @@ onMounted(() => { p.value.textContent = 'mounted!' })
 ## Event listener
   
 ````html
-<script setup>
+<script>
 import { ref } from 'vue'
 
-const count = ref(0)
-let count2 = 0
+setup() {
+	const count = ref(0)
+	let count2 = 0
 
-function increment() {
-  count2++
-  count.value++
+	function increment() {
+	  count2++
+	  count.value++
+	}
+	return { increment, count, count2 }
 }
 </script>
 
@@ -230,12 +270,15 @@ function increment() {
 ### v-if v-else
 
 ````html
-<script setup>
+<script>
 import { ref } from 'vue'
 
-const awesome = ref(true)
+setup() {
+	const awesome = ref(true)
 
-function toggle() { awesome.value = !awesome.value }
+	function toggle() { awesome.value = !awesome.value }
+	retur { awesome, toggle }
+}
 </script>
 
 <template>
@@ -249,27 +292,30 @@ function toggle() { awesome.value = !awesome.value }
 ### v-for
 
 ````html
-<script setup>
+<script>
 import { ref } from 'vue'
 
-// give each todo a unique id
-let id = 0
+setup() {
+	// give each todo a unique id
+	let id = 0
 
-const newTodo = ref('')
-const todos = ref([
-  { id: id++, text: 'Learn HTML' },
-  { id: id++, text: 'Learn JavaScript' },
-  { id: id++, text: 'Learn Vue' }
-])
+	const newTodo = ref('')
+	const todos = ref([
+	  { id: id++, text: 'Learn HTML' },
+	  { id: id++, text: 'Learn JavaScript' },
+	  { id: id++, text: 'Learn Vue' }
+	])
 
-function addTodo() {
-  todos.value.push({ id: id++, text: newTodo.value})
-  // reset todo
-  newTodo.value = ''
-}
+	function addTodo() {
+	  todos.value.push({ id: id++, text: newTodo.value})
+	  // reset todo
+	  newTodo.value = ''
+	}
 
-function removeTodo(todo) {
-  todos.value = todos.value.filter(t => t.id !== todo.id)
+	function removeTodo(todo) {
+	  todos.value = todos.value.filter(t => t.id !== todo.id)
+	}
+	return { addTodo, newTodo, todos, removeTodos }
 }
 </script>
 
@@ -294,12 +340,14 @@ function removeTodo(todo) {
 Le 2-way binding avec vue se caractérise par l'utilisation du v-bind + v-on. Pour simplifier cela on peut simplement utiliser ````v-model="maVar"````
   
 ````html
-<script setup>
+<script>
 import { ref } from 'vue'
 
-const text = ref('')
-
-function onInput(e) { text.value = e.target.value }
+setup() {
+	const text = ref('')
+	function onInput(e) { text.value = e.target.value }
+	return { text, onInput }
+}
 </script>
 
 <template>
@@ -333,10 +381,14 @@ export class DoublecountComponent {
 	
 *Vue*
 ````html
-<script setup>
+<script>
 import { ref, computed } from 'vue';
-const count = ref(10);
-const doubleCount = computed(() => count.value * 2);
+	
+setup() {
+	const count = ref(10);
+	const doubleCount = computed(() => count.value * 2);
+	return { count, doubleCount }
+}
 </script>
 
 <template>
@@ -346,33 +398,36 @@ const doubleCount = computed(() => count.value * 2);
 
 **Autre exemple**
 ````html
-<script setup>
+<script>
 import { ref, computed } from 'vue'
 
-let id = 0
+setup() {
+	let id = 0
 
-const newTodo = ref('')
-const hideCompleted = ref(false)
-const todos = ref([
-  { id: id++, text: 'Learn HTML', done: true },
-  { id: id++, text: 'Learn JavaScript', done: true },
-  { id: id++, text: 'Learn Vue', done: false }
-])
-const filteredTodos = computed(() => {
-  // return filtered todos based on
-  // `todos.value` & `hideCompleted.value`
-  return hideCompleted.value
-	? todos.value.filter((t) => !t.done)
-	: todos.value
-})
+	const newTodo = ref('')
+	const hideCompleted = ref(false)
+	const todos = ref([
+	  { id: id++, text: 'Learn HTML', done: true },
+	  { id: id++, text: 'Learn JavaScript', done: true },
+	  { id: id++, text: 'Learn Vue', done: false }
+	])
+	const filteredTodos = computed(() => {
+	  // return filtered todos based on
+	  // `todos.value` & `hideCompleted.value`
+	  return hideCompleted.value
+		? todos.value.filter((t) => !t.done)
+		: todos.value
+	})
 
-function addTodo() {
-  todos.value.push({ id: id++, text: newTodo.value, done: false })
-  newTodo.value = ''
-}
+	function addTodo() {
+	  todos.value.push({ id: id++, text: newTodo.value, done: false })
+	  newTodo.value = ''
+	}
 
-function removeTodo(todo) {
-  todos.value = todos.value.filter((t) => t !== todo)
+	function removeTodo(todo) {
+	  todos.value = todos.value.filter((t) => t !== todo)
+	}
+	return { newTodo, todos, hideCompleted, addTodo, removeTodo, filteredTodos}
 }
 </script>
 
@@ -395,9 +450,7 @@ function removeTodo(todo) {
 </template>
 
 <style>
-.done {
-  text-decoration: line-through;
-}
+.done { text-decoration: line-through; }
 </style>
 ````
 [Back to top](#bases)   
@@ -411,18 +464,20 @@ https://vuejs.org/guide/essentials/watchers.html
 **Ex 1 : déclencher un affichage console lorsqu'une valeur est modifiée**
   
 ````html
-<script setup>
+<script>
 import { ref, watch } from 'vue'
 
-const count = ref(0)
+setup() {
+	const count = ref(0)
 
-function increment() { count.value++ }
- 
-// watcher
-watch(count, (newCount) => {
-  console.log(`new count is ${newCount}`)
-})
-  
+	function increment() { count.value++ }
+
+	// watcher
+	watch(count, (newCount) => {
+	  console.log(`new count is ${newCount}`)
+	})
+	return { count, increment }
+}  
 </script>
 
 <template>
@@ -438,27 +493,30 @@ watch(count, (newCount) => {
 **Ex 2 : Lister des todos à chaque incrémentation du todoId**
   
 ````html
-<script setup>
+<script>
 import { ref, watch } from 'vue'
 
-const todoId = ref(1)
-const todoData = ref(null)
-  
-async function fetchData() {
-  todoData.value = null
-  // timeout pour simuler le chargement
-  setTimeout(async () => {
-    const res = await fetch(
-      `https://jsonplaceholder.typicode.com/todos/${todoId.value}`
-    )  
-    todoData.value = await res.json()
-  }, 500)  
-  
+setup() {
+	const todoId = ref(1)
+	const todoData = ref(null)
+
+	async function fetchData() {
+	  todoData.value = null
+	  // timeout pour simuler le chargement
+	  setTimeout(async () => {
+	    const res = await fetch(
+	      `https://jsonplaceholder.typicode.com/todos/${todoId.value}`
+	    )  
+	    todoData.value = await res.json()
+	  }, 500)  
+
+	}
+	// watcher qui déclenche le chargement du todo lors de l'incrémentation du todoId
+	watch(todoId, fetchData)  
+
+	fetchData()
+	return { todoId, todoData }
 }
-// watcher qui déclenche le chargement du todo lors de l'incrémentation du todoId
-watch(todoId, fetchData)  
-  
-fetchData()
 </script>
 
 <template>
@@ -489,23 +547,35 @@ fetchData()
 Le composant enfant doit définir la liste des paramètres qu'il expose
 
 ````html
-<script setup>
+<script>
+export default {
+	name: 'ChildComponent',
+	props: {
+		msg: String,
+		count: Number
+	}
+}
+/*
+// Syntaxe script setup
 const props = defineProps({
   msg: String,
   count: Number
 })
+*/
 </script>
 ````
 
 Ces propriétés sont accessibles depuis le code via l'objet retourné par defineProps() et sont accessible aux parents de la manière suivante via un v-bind
 
 ````html
-<script setup>
+<script>
 import { ref } from 'vue'
 import ChildComp from './ChildComp.vue'
 
-const greeting = ref('Hello from parent')
-
+setup() {
+	const greeting = ref('Hello from parent');
+	return { greeting }
+}
 </script>
 
 <template>
@@ -517,68 +587,87 @@ const greeting = ref('Hello from parent')
   
 > équivalent @Output() Angular
 
-Déclaration des évènements depuis le composant enfant
+https://www.youtube.com/watch?v=EEeaG0BTBQo&ab_channel=LearnVue
 
+#### Solution 1 : émettre depuis la vue : $emit
+
+*Parent.vue*
 ````html
-<script setup>
-// declare emitted events
-const emit = defineEmits(['response'])
-
-// emit with argument
-emit('response', 'hello from child')
-</script>
-````
-  
-Réaction à l'évènement depuis le parent
-
-````html
-<ChildComp @response="(msg) => childMsg = msg" />
-````
-
-**Ex d'écoute :**
-
-````html
-<script setup>
-import { ref } from 'vue'
-import ChildComp from './ChildComp.vue'
-
-const childMsg = ref('No child msg yet')
-</script>
-
 <template>
-  <ChildComp @:response="(msg) => childMsg = msg"/>
-  <p>{{ childMsg }}</p>
-</template>  
-````  
-
-````html
-<script setup>
-import { ref, reactive } from 'vue'
-
-  let fixedMessage = 'Hello World !'
-  const dynamicMessage = ref('My name is ')	// Déclaré avec ref(...) l'objet expose une propriété value
-  dynamicMessage.value += 'toto';
-// component logic
-const counter = reactive({
-  count: 1
-})
-</script>
-
-<template>
-  <h1>{{ fixedMessage }}</h1>
-  <h4>
-    {{ dynamicMessage }}
-  </h4>
-  <p>
-    {{counter.count}}
-  </p>
+	<Header @response="searchRestaurant"></Header>
 </template>
 
-<style>
-  h1 {
-    color: coral;
-  }
-</style>
+<script>
+...
+setup() {
+	searchRestaurant(event) {
+		console.log(event);
+	}
+}
+</script>
+````
+
+*Child.vue*
+````html
+<template>
+<input 
+    v-model="searchField" 
+    @change="$emit('response', $event.target.value)"
+    type="text" 
+    placeholder="Que chezchez vous ?"/>
+</template>
+````
+
+
+#### Solution 2 - émettre depuis le script avec un custom event
+
+*Child.vue*
+````html
+<template>
+<input 
+    v-model="searchField" 
+    @change="sendChange"
+    type="text" 
+    placeholder="Que cherchez vous ?"/>
+</template>
+
+<script lang="ts">
+import { ref, watch } from 'vue';
+
+export default {
+    name: 'Header',
+    emits: ["customChange"],	// <--- déclarer le nom de l'event sinon warning
+    setup(props, { emit }) {	// <--- utilisation directe de la fonction emit avec destructuration du context.emit
+        
+		const sendChange = (event) => {
+			emit("customChange", event.target.value)	// <--- utilisation directe du emit
+		}
+		
+        return {
+            sendChange
+        }
+    }
+}
+</script>
+````
+
+**Autre syntaxe simplifiée possible**
+
+````typescript
+<script lang="ts">
+import { ref, watch } from 'vue';
+
+export default {
+    name: 'Header',
+    // emits: ["customChange"], // <--- non nécessaire
+    setup(props, context ) {	// <--- syntaxe sans destructuration, 'context' peut prendre le nom que l'on souhaite
+        const sendChange = (event) => {
+		context.emit("customChange", event.target.value)	// <--- appeler <nom>.emit
+	}
+	...
+    }
+}
+</script>
 ````
 	
 [Back to top](#bases)    
@@ -826,18 +915,210 @@ export default router;
 	router.push({ path: '/about', hash: '#team' })
 </script>
 ````
-[Back to top](#bases)       
+[Back to top](#bases)    
+	
+### Passage de paramètres en mode props
 
+*route.ts*
+
+````typescript
+const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    redirect: 'home'
+  },
+  {
+    path: '/home',
+    name: 'home',
+    component: () => import('../page/Home.vue')
+  },
+  {
+    path: '/restaurant/:restaurantName',
+    name: 'restaurant',
+    props: true,	// <--- permet la récupération du paramètre comme une props
+    component: () => import('../page/Restaurant.vue')
+  }
+]
+````
+
+*Parent.vue*
+
+````html
+<template>
+	<button @click="navigateToItem">Open</button>
+</template>
+
+<script lang="ts">
+import router from '@/router';
+
+export default {
+    name: 'Parent',
+    setup() {
+        function navigateToItem() {
+            router.push({ name: 'restaurant', params: { restaurantName: 'Subway' }});
+        }
+
+        return {
+            navigateToItem
+        }
+    }
+}
+</script>
+````
+
+*Restaurant.vue*
+
+````html
+<template>
+  <div class="content">
+    <h1>{{ restaurantName }}</h1>
+	
+	<!-- ##### AUTRE SOLUTION ##### -->
+	<h1>{{ $route.params.restaurantName }}</h1>
+  </div>
+</template>
+
+<script lang="ts">
+
+export default {
+    name: 'RestaurantModale',
+    props: [
+        'restaurantName'	// <--- paramètre de routing reçu en tant que props
+    ]
+}
+</script>
+
+<style>
+
+</style>
+````
+[Back to top](#bases)      
+
+### Lister les params d'une route
+
+````typescript
+import router from '@/router';
+
+setup() {
+	const params = router.currentRoute.value.params
+	console.log('params', params);
+}
+````
+[Back to top](#bases)     
+
+### Routing dans la vue
+
+````html
+<template>
+    <router-link 
+        class="restaurant-card" 
+        :to="{ name: 'restaurant', params: { restaurantName: restaurant.name }}"
+        style="text-decoration: none; color: inherit;">
+        
+        <div class="content">
+          <!-- some content here -->
+        </div>
+    </router-link>
+</template>
+````
+[Back to top](#bases)    
+
+### Modifier le titre des pages
+
+*router/index.ts*
+
+````typescript
+const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView,
+    meta: {
+      title: 'Home'
+    }
+  },
+]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+})
+
+// Changer le titre des pages
+router.beforeEach((to, from, next) => {
+  document.title = `${to.meta.title} | Active Tracker`
+});
+````
+[Back to top](#bases)    
+
+### Route guard
+
+*router/index.ts*
+````typescript
+const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView,
+    meta: {
+      title: 'Home',
+	  auth: false	// <--
+    }
+  },{
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/Login.vue'),
+    meta: {
+      title: 'Login',
+      auth: false	// <--
+    }
+  },{
+    path: '/create',
+    name: 'create',
+    component: () => import('../views/Create.vue'),
+    meta: {
+      title: 'Create',
+      auth: true	// <--
+    }
+  },
+  { 
+    path: '/:pathMatch(.*)*', 	// <-- Page 404
+    name: 'not-found', 
+    component: () => import('../views/Error404.vue'),
+  }
+]
+
+// Guard
+router.beforeEach((to, from, next) => {
+  // Vérifier la condition voulue : ici on vérifie que l'utilisateur est authentifié avec supabase
+  const user = supabase.auth.user();  // récupérer l'état d'authentification de l'utilisateur supabase
+
+  if (to.matched.some((res) => res.meta.auth)) {
+    if (user) {
+      next();
+      return;
+    }
+    next({name: 'login'});	// <-- redirection vers le login
+    return;
+  }
+  next();	// <-- laisser continuer la redirection
+});
+````
+[Back to top](#bases)    
+	
 ## Divers
 
 ajouter une classe / id css dynamique
 
 ````html
-<script setup>
-	import { ref } from 'vue'
+<script>
+import { ref } from 'vue'
 
+setup() {
 	const titleClass = ref('title')
 	const myDivId = ref('myDiv')
+	return { titleClass, myDivId }
+}
 </script>
 
 <template>
