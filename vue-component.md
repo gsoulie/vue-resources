@@ -37,7 +37,7 @@ A là manière du *ng-content* d'Angular, il est possible d'utiliser le slot inj
 </template>
 ````
 
-> Aura pour effet de déclencher la fonction *presentAlert()* du **Parent** ! En effet tout ce qui est à l'intérieur des balises entourant le slot appartient au le scope du **parent**
+> Aura pour effet de déclencher la fonction *presentAlert()* du **Parent** ! En effet tout ce qui est à l'intérieur des balises entourant le slot appartient au scope du **parent**
 
 Pour pouvoir utiliser des fonctions du composants enfant depuis le parent il faut utiliser la directive **v-slot**
 
