@@ -2,6 +2,12 @@
 
 # Bonnes pratiques
 
+## Recommandations officielles
+
+* [Essentiel](https://vuejs.org/style-guide/rules-essential.html)      
+* [Fortement recommandé](https://vuejs.org/style-guide/rules-strongly-recommended.html)      
+* [Recommandé](https://vuejs.org/style-guide/rules-recommended.html#component-instance-options-order)     
+
 ## ApiHelper
 
 https://www.youtube.com/watch?v=fh0VboqAc8k&ab_channel=ProgramWithErik      
