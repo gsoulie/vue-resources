@@ -41,3 +41,42 @@ setup() {
 }
 </script>
 ````
+
+## Autre exemple
+
+````typescript
+import { ref, toRaw } from 'vue';
+
+export function useSort(data) {
+	const sortedItems = ref([])
+	
+	const sortByStrings = (criteria) => {
+		return data.sort((a, b) => {
+			if(a[criteria] < b[criteria]) return -1;
+			if(a[criteria] > b[criteria]) return 1;
+			return 0;
+		});
+	}
+	
+	const sortByNumbers = (criteria) => {
+		return data.sort((a, b) => a[criteria] - b[criteria]);
+	}
+	
+	const sortByDates = (criteria) => {
+		return data.sort((a, b) => {
+			return new Date(a[criteria]) - new Date(b[criteria])
+		});
+	}
+	
+	
+	function sortItemBy(criteria) {
+		const type = typeof toRaw(data)[0][criteria];
+		
+		if (type === 'string') return sortByStrings(criteria)
+		if (type === 'number') return sortByNumbers(criteria)
+		if (type === 'object') return sortByDates(criteria)
+	}
+	
+	return { sortedItems, sortItemBy }
+}
+````
