@@ -8,7 +8,7 @@
 
 * State = les variables     
 * Getter = accesseurs des variables du state     
-* Mutations = modificateurs **synchrones*** <img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> des variables du state     
+* Mutations = modificateurs **synchrones** <img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> des variables du state     
 * Actions = modificateurs **asynchrones** <img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> (peut être utilisé comme un service Angular mais un vrai service est préférable)      
 * Modules = state dans le state     
 
@@ -38,6 +38,14 @@ declare module '@vue/runtime-core' {
 declare module "vuex" {
   export function useStore(key?: string): Store<State>;
 }
+````
+
+*main.ts*
+
+````typescript
+import { store } from './store'
+
+createApp(App).use(store).use(router).mount('#app')
 ````
 
 *src/store/index.ts*
@@ -99,3 +107,18 @@ export default {
 }
 </script>
 ````
+
+## Conventions et bonnes pratiques
+
+Les noms des mutations sont en majuscule ````SET_USERS(state, payload)````
+
+Pour accéder au store depuis le composant, il est préconisé d'utiliser une fonction ````computed(()=>{})```` plutot que d'accéder directement au *store.state.value*
+
+````typescript
+import { useStore } from 'vuex';
+setup() {
+        	const store = useStore();
+        	const users = computed(() => store.state.players);
+	}
+````
+
