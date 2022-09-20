@@ -8,6 +8,7 @@
 * [Initialisation projet](#initialisation-projet)       
 * [Raccourcis](#raccourcis)     
 * [Lifecycle hook](#lifecycle-hook)      
+* [Custom font](#custom-font)     
 
 ## Présentation
 
@@ -198,4 +199,41 @@ setup() {
 </template>
 ````
   
+[Back to top](#généralités)     
+
+## Custom font
+
+1 - uploader les fonts dans le répertoire **/public/fonts**
+	
+2 - Configurer le fichier **/public/index.html** pour pré-charger les fonts
+	
+*index.html*
+````html
+<head>
+	<link rel="preload" as="font" href="./fonts/TitilliumWeb-Regular.ttf" type="font/ttf" crossorigin="anonymous">
+</head>
+````
+
+3 - Fichier **styles.scss**
+
+Déclarer ensuite les fonts dans le fichier de style global
+	
+````css
+	@font-face {
+    font-family: "TitilliumWeb-Regular";
+    src: local("TitilliumWeb-Regular"), url("/public/fonts/TitilliumWeb-Regular.ttf") format("truetype");
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    margin: 0;
+    font-family: 'TitilliumWeb-Regular', Helvetica, Arial, sans-serif;
+    background-color: #f0f0f0;
+}  
+button {
+	font-family: 'TitilliumWeb-Regular', Helvetica, Arial, sans-serif;	// IMPORTANT sinon non pris en compte sur les boutons
+}
+````
 [Back to top](#généralités)     
