@@ -2,7 +2,7 @@
 
 # Composable
 
-Un code partagé entre plusieurs composant peut être extrait dans un troisième composant qui sera appelé dans chacun des autres composants ayant besoin de ce même code. Avec Vue, une autre solution existe, les **Composables**. Les Composables permettent de partager du code *controller* à la manière d'un *serivce* Angular
+Un code partagé entre plusieurs composant peut être extrait dans un troisième composant qui sera appelé dans chacun des autres composants ayant besoin de ce même code. Avec Vue, une autre solution existe, les **Composables**. Les Composables permettent de partager du code *controller* à la manière d'un *service* Angular
 
 Exemple de composable
 
