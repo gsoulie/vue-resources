@@ -8,6 +8,7 @@
 	* Raccourcis    
 	* Lifecycle hook    
 	* Bonnes pratiques      
+	* Custom font     
 * [Directives structurelles](https://github.com/gsoulie/vue-resources/blob/main/vue-directive.md)      
 * [Component Slot injection](https://github.com/gsoulie/vue-resources/blob/main/vue-component.md)      
 * [>> Projet exemple](https://github.com/gsoulie/vue-example-ubereats)      
