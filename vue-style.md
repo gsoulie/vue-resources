@@ -29,3 +29,9 @@ setup() {
 	}
 </style>
 ````
+
+## Modifier dynamiquement une propriété css
+
+````html
+<div class="circle" :style="{color: item.color}"></div>
+````
