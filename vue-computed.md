@@ -18,6 +18,8 @@ Comment le cache des fonctions computed ?
 3 : Si au prochain rendu (à l’update), il voit qu’une donnée réactive utilisée dans le computed a changé, il ré-exécute le computed pour créer un nouveau résultat et le remet en cache     
 4 : S’il ne trouve aucune dépendance (donnée réactive), il renverra toujours le même résultat, celui du cache précédent.     
 
+> IMPORTANT : Vérifier s'il est possible de passer des paramètres à une computed !!!
+
 *RestaurantCard.vue*
 
 ````html
