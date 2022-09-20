@@ -8,8 +8,8 @@
 
 * State = les variables     
 * Getter = accesseurs des variables du state     
-* Mutations = modificateurs **synchrones** des variables du state     
-* Actions = modificateurs **asynchrones** (peut être utilisé comme un service Angular mais un vrai service est préférable)      
+* Mutations = modificateurs **synchrones*** [<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO">] des variables du state     
+* Actions = modificateurs **asynchrones (IMPORTAN)** (peut être utilisé comme un service Angular mais un vrai service est préférable)      
 * Modules = state dans le state     
 
 ### Utilisation de vuex avec typescript
