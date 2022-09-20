@@ -64,17 +64,11 @@ const state: State = {
 export const store = createStore({
   state,
   getters: {
-    getPlayers(state) {
-      return state.players.slice();
-    }
+    getPlayers(state) { return state.players.slice(); }
   },
   mutations: {
-    ADD_PLAYER(state, payload: Player) {
-      state.players.push(payload)
-    },
-    SET_PLAYERS(state, payload: Player[]) {
-      state.players = payload;
-    },
+    ADD_PLAYER(state, payload: Player) { state.players.push(payload) },
+    SET_PLAYERS(state, payload: Player[]) { state.players = payload; },
     REMOVE_PLAYER(state, payload: Player) {
       const playerIndex = state.players.findIndex(p => p.name === payload.name);
       if (playerIndex >= 0) {
@@ -83,19 +77,15 @@ export const store = createStore({
     },
     INCREMENT(state, payload: Player) {
       state.players.map(p => {
-        if (p.name === payload.name) {
-          p.score = payload.score
-        }
+        if (p.name === payload.name) { p.score = payload.score }
       })
     },
     RESET_SCORE(state) {
       state.players = state.players.map((p: Player) => ({ name: p.name, color: p.color, score: 0 }));
     }
   },
-  actions: {
-  },
-  modules: {
-  }
+  actions: { },
+  modules: { }
 })
 ````
 
