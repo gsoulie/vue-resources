@@ -45,7 +45,7 @@ props: {
 </script>
 
 <template>
-	<WelcomeMessage greeting-text="hi"/>
+	<WelcomeMessage :greeting-text="hi"/>
 </template>
 ````
 
