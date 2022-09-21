@@ -2,6 +2,8 @@
 
 * [Généralités](https://github.com/gsoulie/vue-resources/blob/main/vue-init.md)      
 	* Présentation     
+	* Script setup
+	* ref() vs reactive()
 	* Commandes    
 	* Extensions VSCode    
 	* Initialisation projet    
