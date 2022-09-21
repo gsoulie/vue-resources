@@ -3,6 +3,7 @@
 # Généralités
 
 * [Présentation](#presentation)    
+* [ref() vs reactive()](#ref---vs-reactive--)     
 * [Commandes](#commandes)      
 * [Extensions VSCode](#extensions-vscode)   
 * [Initialisation projet](#initialisation-projet)       
