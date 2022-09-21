@@ -24,16 +24,47 @@ On retrouve aussi l’organisation par composant. Cette fonctionnalité permet d
 
 VueJS se concentre sur la partie vue de ton application. Pour ce faire, le framework s’inspire en partie du patron d’architecture MVVM. VueJS va lier ton DOM, la partie vue, avec ton instance de vue, la partie Vue-Modèle. Ces deux parties sont liées par le système de data-binding
 
-
 Le code présenté ici utilise l'api *composition* et la syntaxe *SFC (Single File Component)* ainsi que l'utilisation du script ````<script setup>````
 
 La fonctionnalité principale de Vue est le **rendu déclaratif** : en utilisant une syntaxe de modèle qui étend le HTML, nous pouvons décrire à quoi le HTML devrait ressembler en fonction de l'état de JavaScript. Lorsque l'état change, le HTML se met à jour automatiquement
 
+## ref() vs reactive()
+
 L'état qui peut déclencher des mises à jour lorsqu'il est modifié est considéré comme **reactive**. Nous pouvons déclarer l'état réactif en utilisant l'API ````reactive()```` de Vue. Les objets créés à partir de ````reactive()```` sont des proxies JavaScript qui fonctionnent comme des objets normaux
 
-````reactive()*```` ne fonctionne que sur les objets (y compris les tableaux et les types intégrés comme Map et Set). ````ref()````, d'autre part, peut prendre n'importe quel type de valeur et créer un objet qui expose la valeur interne sous une propriété ````.value````
+````reactive()```` ne fonctionne que sur les objets (y compris les tableaux et les types intégrés comme Map et Set). ````ref()````, d'autre part, peut prendre n'importe quel type de valeur et créer un objet qui expose la valeur interne sous une propriété ````.value````
 
 Les variables qui ne sont pas utilisées dans la vue n'ont pas besoin d'être déclarée comme ````reactive()```` ou ````ref()````.
+
+Il est **conseillé** de préférer l'utilisation de ````ref()```` qui présente plus d'avantage que *reactive()*
+
+En résumé :
+
+**ref**
+* Fonctionne sur les types primitifs et objets
+* peut être réaffecté
+
+**reactive**
+* Ne nécessite pas l'utilisation du .value 
+* Ne fonctionne **pas** sur les types primitifs (number, string, boolean) ex : ````const value = reactive(3); // lève une erreur console````
+* Ne peut pas être réaffecté
+
+````typescript
+let cube = reactive({
+        length: 10,
+        height: 20,
+        width: 30
+});
+
+const update = () => {
+    cube = {
+        length: 9,
+        height: 99,
+        width: 999
+    };
+	// NE FONCTIONNE PAS
+}
+````
 
 Deux syntaxes sont alors possibles :
 
