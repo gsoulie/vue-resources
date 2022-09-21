@@ -13,7 +13,7 @@
 	* Custom font     
 * [Directives structurelles](https://github.com/gsoulie/vue-resources/blob/main/vue-directive.md)      
 * [Component Slot injection](https://github.com/gsoulie/vue-resources/blob/main/vue-component.md)      
-* [>> Projet exemple](https://github.com/gsoulie/vue-example-ubereats)      
+* [Projet exemple][<img src="https://img.shields.io/badge/Dépôt-Example-DD0031.svg?logo=LOGO">](https://github.com/gsoulie/vue-example-ubereats)      
 * [Frameworks UI](https://github.com/gsoulie/vue-resources/blob/main/vue-ui.md)     
 * [Vueuse](https://github.com/gsoulie/vue-resources/blob/main/vue-use.md)     
 * [Props et Events](https://github.com/gsoulie/vue-resources/blob/main/vue-event.md)     
