@@ -3,6 +3,7 @@
 # Généralités
 
 * [Présentation](#presentation)    
+* [Script setup](#script-setup)     
 * [ref() vs reactive()](#ref-vs-reactive)     
 * [Commandes](#commandes)      
 * [Extensions VSCode](#extensions-vscode)   
@@ -28,6 +29,54 @@ VueJS se concentre sur la partie vue de ton application. Pour ce faire, le frame
 Le code présenté ici utilise l'api *composition* et la syntaxe *SFC (Single File Component)* ainsi que l'utilisation du script ````<script setup>````
 
 La fonctionnalité principale de Vue est le **rendu déclaratif** : en utilisant une syntaxe de modèle qui étend le HTML, nous pouvons décrire à quoi le HTML devrait ressembler en fonction de l'état de JavaScript. Lorsque l'état change, le HTML se met à jour automatiquement
+
+[Back to top](#généralités)     
+
+## Script setup
+
+Le script ````setup```` permet de s'affranchir de la syntaxe return qui permet d'exposer les variables / fonctions à la vue
+
+Deux syntaxes sont alors possibles :
+
+*Avec script setup*
+
+````typescript
+<script setup lang="ts">
+import DropDown from './DropDown.vue';
+import { defineProps } from 'vue';
+
+const props = defineProps({
+    showMenu: Boolean
+})
+
+function setHello() {...}
+</script>
+````
+
+*Sans script setup*
+
+````typescript
+<script lang="ts">
+import DropDown from './DropDown.vue';
+
+export default {
+    name: 'Header',
+    components: {
+        DropDown
+    },
+    props: {
+        showMenu: Boolean
+    },
+    setup() {
+		function setHello() {...}
+		
+		return { setHello }
+	}
+}
+</script>
+````
+
+[Back to top](#généralités)     
 
 ## ref() vs reactive()
 
@@ -67,44 +116,8 @@ const update = () => {
 }
 ````
 
-Deux syntaxes sont alors possibles :
-
-````typescript
-<script setup>
-import { ref } from 'vue'
-
-const awesome = ref(true)
-
-function toggle() { awesome.value = !awesome.value }
-</script>
-
-<template>
-  <button @click="toggle">toggle</button>
-  <h1 v-if="awesome">Vue is awesome!</h1>
-  <h1 v-else>Oh no 😢</h1>
-</template>
-````
-
-Ou
-
-````typescript
-<script>
-import { ref } from 'vue'
-
-setup() {
-	const awesome = ref(true)
-	function toggle() { awesome.value = !awesome.value }
-	
-	return { awesome, toggle }
-}
-</script>
-
-<template>
-  <button @click="toggle">toggle</button>
-  <h1 v-if="awesome">Vue is awesome!</h1>
-  <h1 v-else>Oh no 😢</h1>
-</template>
-````
+**ref, isRef, unref, reactive, toRef, toRefs, customRef, ...**
+https://www.youtube.com/watch?v=sAj6tdVS2cA&ab_channel=ProgramWithErik
 
 [Back to top](#généralités)     
 
