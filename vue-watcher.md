@@ -2,6 +2,11 @@
 
 # Watchers
 
+* [Généralités et exemples](#généralités-et-exemples)     
+* [propriété deep](#propriété-deep)     
+
+## Généralités et exemples
+
 Les *watchers* permettent de déclencher un traitement dès lors qu'une modification intervient sur la valeur observée.
 
 https://vuejs.org/guide/essentials/watchers.html      
@@ -23,6 +28,11 @@ export default {
         
         watch(searchField, (newValue, oldValue) => {
             console.log(newValue);
+        });
+	
+        // Observer les changements de la variable "name"
+        watch(name, (newVal: string) => {
+            localStorage.setItem('name', newVal);	// mémorisation de la valeur en local storage à chaque modification de cette dernière
         });
 
         return {
@@ -97,4 +107,19 @@ setup() {
   <p v-if="!todoData">Loading...</p>
   <pre v-else>{{ todoData }}</pre>
 </template>
+````
+
+## Propriété deep
+
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> Pour l'observation des objets et tableaux il est **nécessaire** d'ajouter la propriété ````deep: true```` au watcher.
+
+En effet, de base, les watchers n'observent que la modification de la valeur observée. Ils sont donc déclenchés en cas de réaffectation d'une valeur. Dans le cas des objets et tableaux, l'ajout, suppresssion d'un élément n'est pas détecté. 
+
+Il faut donc indiquer au watcher qu'on souhaite observer la moindre modification (modification, ajout et suppression).
+
+````
+// Observer les changements de la liste todos
+watch(todos, (newVal: ITodo[]) => {
+	localStorage.setItem('todos', JSON.stringify(newVal));
+}, { deep: true });
 ````
