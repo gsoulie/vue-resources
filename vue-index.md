@@ -25,4 +25,4 @@
 * [Vue state avec vuex](https://github.com/gsoulie/vue-resources/blob/main/vue-state.md)     
 * [CRUD avec supabase](https://github.com/gsoulie/vue-resources/blob/main/vue-supabase.md)     
 * [Styles](https://github.com/gsoulie/vue-resources/blob/main/vue-style.md)     
-* [LocalStorage]((https://github.com/gsoulie/vue-resources/blob/main/vue-localstorage.md)      
+* [LocalStorage](https://github.com/gsoulie/vue-resources/blob/main/vue-localstorage.md)      
