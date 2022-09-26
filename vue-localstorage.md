@@ -6,7 +6,7 @@ L'utilisation du local storage avec Vue est plutôt simple, il suffit d'utiliser
 
 Voici un exemple de todo list basique : 
 
-````jsx
+````typescript
 <script lang="ts">
 
 import { ref, onMounted, computed, watch } from 'vue';
